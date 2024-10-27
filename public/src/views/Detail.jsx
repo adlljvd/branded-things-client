@@ -6,9 +6,9 @@ import gearLoad from "../assets/loading.svg"
 
 export default function Detail({ base_url }) {
     const [categories, setCategories] = useState([]);
-    const [product, setProduct] = useState("")
-    const [loading, setLoading] = useState(false)
-    const { id } = useParams()
+    const [product, setProduct] = useState({ name: '', description: '', price: 0, imgUrl: '', categoryId: 0 });
+    const [loading, setLoading] = useState(false);
+    const { id } = useParams();
 
     // Fetch categories
     async function fetchCategories() {
@@ -20,30 +20,28 @@ export default function Detail({ base_url }) {
         }
     }
 
-
     async function fetchProduct() {
         try {
-            setLoading(true)
+            setLoading(true);
             const { data } = await axios.get(`${base_url}/pub/products/${id}`);
-            // console.log("hasil:", data.product, "<<fetching data")
             setProduct(data.product);
         } catch (error) {
             console.log("Error fetching products:", error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
     useEffect(() => {
-        fetchCategories()
-        fetchProduct()
-    }, [])
+        fetchCategories();
+        fetchProduct();
+    }, []);
 
     return (
         <div className="bg-white">
             {loading ? (
                 <div className="mt-32 flex justify-center items-center">
-                    <img src={gearLoad} />
+                    <img src={gearLoad} alt="Loading..." />
                 </div>
             ) : (
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -68,13 +66,13 @@ export default function Detail({ base_url }) {
                                 </li>
                                 <li>
                                     <div className="flex items-center text-sm">
-                                        {categories.map(el => {
-                                            return el.id === product.categoryId ? (
+                                        {categories.map(el => (
+                                            el.id === product.categoryId ? (
                                                 <span className="font-medium text-gray-900" key={el.id}>
                                                     {el.name}
                                                 </span>
-                                            ) : null;
-                                        })}
+                                            ) : null
+                                        ))}
                                     </div>
                                 </li>
                             </ol>
@@ -90,11 +88,13 @@ export default function Detail({ base_url }) {
                             </h2>
 
                             <div className="flex items-center">
-                                <p className="text-lg text-gray-900 sm:text-xl">{product.price.toLocaleString('en-ID', { style: 'currency', currency: 'IDR' })}</p>
-
-                                <div className="ml-4 border-l border-gray-300 pl-4">
-
-                                </div>
+                                {product.price !== undefined ? (
+                                    <p className="text-lg text-gray-900 sm:text-xl">
+                                        {product.price.toLocaleString('en-ID', { style: 'currency', currency: 'IDR' })}
+                                    </p>
+                                ) : (
+                                    <p className="text-lg text-gray-900 sm:text-xl">Price not available</p>
+                                )}
                             </div>
 
                             <div className="mt-4 space-y-6">
@@ -114,9 +114,9 @@ export default function Detail({ base_url }) {
                             <img alt={product.name} src={product.imgUrl} className="h-full w-full object-cover object-center" />
                         </div>
                     </div>
-
                 </div>
             )}
         </div>
     )
 }
+
