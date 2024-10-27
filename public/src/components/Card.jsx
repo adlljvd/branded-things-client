@@ -27,7 +27,7 @@ export default function Card({ product }) {
                             {product.name}
                         </Link>
                     </h3>
-                    <p className="mt-1 text-gray-900">Rp{product.price}</p>
+                    <p className="mt-1 text-gray-900">{product.price.toLocaleString('en-ID', { style: 'currency', currency: 'IDR' })}</p>
                 </div>
             </div>
 
