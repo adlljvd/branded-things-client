@@ -90,7 +90,7 @@ export default function Detail({ base_url }) {
                             </h2>
 
                             <div className="flex items-center">
-                                <p className="text-lg text-gray-900 sm:text-xl">Rp{product.price}</p>
+                                <p className="text-lg text-gray-900 sm:text-xl">{product.price.toLocaleString('en-ID', { style: 'currency', currency: 'IDR' })}</p>
 
                                 <div className="ml-4 border-l border-gray-300 pl-4">
 
