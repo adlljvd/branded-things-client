@@ -37,16 +37,12 @@ export default function HomePage({ base_url }) {
             Toastify({
                 text: `Successfully deleted product`,
                 duration: 3000,
-                gravity: "bottom",
-                position: "right",
                 style: { background: "#FF0000" },
             }).showToast();
         } catch (error) {
             Toastify({
-                text: error.response?.data?.message || "Failed to delete",
+                text: error.response.data.message,
                 duration: 3000,
-                gravity: "bottom",
-                position: "right",
                 style: { background: "#FF0000" },
             }).showToast();
         }
@@ -58,7 +54,7 @@ export default function HomePage({ base_url }) {
             formData.append('imgUrl', file);
 
             const { data } = await axios.patch(`${base_url}/products/${selectedProduct.id}/image`, formData, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+                headers: { Authorization: `Bearer ${localStorage.access_token}` }
             });
 
             fetchProducts();
@@ -69,7 +65,7 @@ export default function HomePage({ base_url }) {
             }).showToast();
         } catch (error) {
             Toastify({
-                text: error.response.data.message || "Upload failed",
+                text: error.response.data.message,
                 duration: 3000,
                 style: { background: "#FF0000" },
             }).showToast();

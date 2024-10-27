@@ -21,15 +21,7 @@ const router = createBrowserRouter([
                 Toastify({
                     text: "You already logged in",
                     duration: 3000,
-                    newWindow: true,
-                    close: true,
-                    gravity: "bottom", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: "#EBF5E6",
-                        color: "#2D6A4F"
-                    }
+                    style: { background: "#008000" },
                 }).showToast();
                 return redirect('/')
             }
@@ -44,15 +36,7 @@ const router = createBrowserRouter([
                 Toastify({
                     text: "Please log in first!",
                     duration: 3000,
-                    newWindow: true,
-                    close: true,
-                    gravity: "bottom", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: "#FDECEA",
-                        color: "#B32626"
-                    }
+                    style: { background: "#FF0000" },
                 }).showToast();
                 return redirect('/login')
             }

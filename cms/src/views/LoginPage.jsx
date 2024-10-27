@@ -24,10 +24,7 @@ export default function Login({ base_url }) {
                 gravity: "bottom", // `top` or `bottom`
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                    background: "#EBF5E6",
-                    color: "#2D6A4F"
-                },
+                style: { background: "#008000" },
             }).showToast();
         } catch (error) {
             console.log(error)
@@ -39,10 +36,7 @@ export default function Login({ base_url }) {
                 gravity: "bottom", // `top` or `bottom`
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                    background: "#FDECEA",
-                    color: "#B32626"
-                }
+                style: { background: "#FF0000" },
             }).showToast();
         }
     }
